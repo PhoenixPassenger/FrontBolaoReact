@@ -1,16 +1,27 @@
 import React, { Component }  from 'react';
-import SharedGroup from './shared-group';
 import { getTeam } from './TeamFunctions'
+import uniqueId from 'lodash/uniqueId';
+import Sortable from 'react-sortablejs';
 
 class Sort extends Component{
     constructor(){
         super();
         this.state= {
             dados:[],
-            isLoading: true
+            isLoading: true,
+            items:[]
         }
         
     }
+    async send(){
+        //console.log(this.simpleList.toArray())
+        await this.setState({
+            items: this.simpleList.toArray() 
+        })
+        this.props.history.push('/') 
+    }
+    
+
 shuffle(arr) {
     var i,
         j,
@@ -45,30 +56,76 @@ shuffle(arr) {
     this.GetTeams()
 }
 
+
+
+
 render(){
+    const divStyle = {
+        margin: '40px',
+        align: 'center'
+      };
+      const btnStyle = {
+        float: 'right'
+      };
+    const simpleList = this.state.dados.map((val, key) => (
+        <li key={uniqueId()} data-id={val}> {val}</li>
+    ));
     
     return (
     <div className="container">
     <div className="jumbotron mt-5">
-        <div className="col-sm-8 mx-auto">
+        <div className="col-sm-8 mx-auto" style={divStyle}> 
         <h1 className="text-center">Bet</h1>
-        <p>Drag the team to the Hint list then push "bet" to use</p>
+        <p className="text-center">Organize the way you want to, then push BET to make the hint</p>
         </div>
-        <table className="table col-md-6 mx-auto">
-            <tbody>
-              <tr>
-                <td>{}</td>
+            <div className="col-sm-8 mx-auto">
                 {this.state.dados && this.state && !this.state.isLoading &&
-                <td>Aposta <SharedGroup items={this.state.dados}/></td>
+            <Sortable
+                options={{
+                    animation: 150
+                }}
+                className="block-list"
+                ref={c => {
+                    if (c) {
+                        this.simpleList = c.sortable;
+                    }
+                }}
+                tag="ol"
+            >
+                {simpleList}
+            </Sortable>
                 }
-              </tr>
-            </tbody>
-          </table>
+                </div >
+                <div>
+              <button style={btnStyle} type="button" class="btn btn-outline-success"  data-toggle="modal" data-target="#exampleModal">
+                    BET
+                </button>
+                </div> 
         <div> 
             <br/>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Make a bet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" > 
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure about that?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.send.bind(this)}>Send Bet</button>
+      </div>
     </div>
+  </div>
+</div>
+    </div>
+    
     );
 };
 }

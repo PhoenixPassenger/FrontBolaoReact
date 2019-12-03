@@ -6,6 +6,7 @@ class Landing extends Component {
     e.preventDefault()
     localStorage.removeItem('usertoken')
     this.props.history.push(`/`)
+    window.location.reload();
   }
 
   render() {
@@ -38,7 +39,7 @@ class Landing extends Component {
         </li>
         <li className="nav-item">
           <Link to="/sort" className="nav-link">
-            Sort
+            Bet
           </Link>
         </li>
       </ul>
