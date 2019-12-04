@@ -1,13 +1,42 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
 
 class Landing extends Component {
+  constructor() {
+    super()
+    this.state = {
+      name: '',
+      nickname: '',
+      email: '',
+      type: '' ,
+      errors: {}
+    }
+  }
   logOut(e) {
     e.preventDefault()
     localStorage.removeItem('usertoken')
     this.props.history.push(`/`)
     window.location.reload();
   }
+  componentWillMount() {
+    if(localStorage.usertoken)
+    {
+      const token = localStorage.usertoken
+      const decoded = jwt_decode(token)
+      this.setState({
+        type : decoded.isAdmin
+      })
+    }
+    
+  }
+type(){
+  if (this.state.type) {
+   return <td>Admin</td>
+  }else{
+  return  <td>Normal</td>
+  }
+}
 
   render() {
     const loginRegLink = (
@@ -25,25 +54,43 @@ class Landing extends Component {
       </ul>
     )
 
-    const userLink = (
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/profile" className="nav-link">
-            User
-          </Link>
-        </li>
-        <li className="nav-item">
-          <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-            Logout
-          </a>
-        </li>
-        <li className="nav-item">
-          <Link to="/sort" className="nav-link">
-            Bet
-          </Link>
-        </li>
-      </ul>
-    )
+    const userAdmin = (<ul className="navbar-nav">
+    <li className="nav-item">
+      <Link to="/profile" className="nav-link">
+        User
+      </Link>
+    </li>
+    <li className="nav-item">
+      <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+        Logout
+      </a>
+    </li>
+    <li className="nav-item">
+      <Link to="/sort" className="nav-link">
+        Bet
+      </Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/round" className="nav-link">
+        Round
+      </Link>
+    </li>
+  </ul>)
+
+  const userCommon = (<ul className="navbar-nav">
+  <li className="nav-item">
+    <Link to="/profile" className="nav-link">
+      User
+    </Link>
+  </li>
+  <li className="nav-item">
+    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+      Logout
+    </a>
+  </li>
+</ul>)
+
+    const userLink = (!this.state.type ? userCommon : userAdmin)
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
