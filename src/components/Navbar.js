@@ -66,11 +66,6 @@ type(){
       </a>
     </li>
     <li className="nav-item">
-      <Link to="/sort" className="nav-link">
-        Bet
-      </Link>
-    </li>
-    <li className="nav-item">
       <Link to="/round" className="nav-link">
         Round
       </Link>
@@ -83,6 +78,11 @@ type(){
       User
     </Link>
   </li>
+  <li className="nav-item">
+      <Link to="/roundname" className="nav-link">
+        Bet
+      </Link>
+    </li>
   <li className="nav-item">
     <a href="" onClick={this.logOut.bind(this)} className="nav-link">
       Logout

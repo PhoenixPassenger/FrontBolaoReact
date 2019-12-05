@@ -22,6 +22,7 @@ class Profile extends Component {
       email: decoded.email,
       type : decoded.isAdmin
     })
+    localStorage.setItem('userId', decoded.id)
   }
 type(){
   if (this.state.type) {

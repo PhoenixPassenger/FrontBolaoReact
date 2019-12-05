@@ -9,15 +9,32 @@ class Sort extends Component{
         this.state= {
             dados:[],
             isLoading: true,
-            items:[]
+            items:[],
+            objetos: []
         }
         
     }
     async send(){
-        //console.log(this.simpleList.toArray())
         await this.setState({
             items: this.simpleList.toArray() 
         })
+        let count = 1
+        let hints = []
+       await this.state.items.forEach(time => {
+            let hint = {
+                idTeam : null,
+                rank : null,
+                competitionName: null,
+                userId: null
+            }
+            hint.competitionName = (localStorage.optionChoosed)
+            hint.idTeam = (this.state.objetos.find(element => element.name === time ).id)
+            hint.rank = count
+            hint.userId = parseInt(localStorage.userId,10)
+            hints.push(hint)
+            count+=1
+        });
+        console.log(hints)
         this.props.history.push('/') 
     }
     
@@ -39,15 +56,18 @@ shuffle(arr) {
          
          let newvet = this.shuffle(a)
          let array = []
+         let arrayIds = []
          newvet.forEach(element => {
              array.push(element.name)
+             arrayIds.push(element)
          });
          let array2 = this.shuffle(array)
          this.setState({
              dados: array2,
+             objetos: arrayIds,
              isLoading: false
          })
-         console.log(this.state.dados)
+        // console.log(this.state.objetos)
          return array2
      })
 }
