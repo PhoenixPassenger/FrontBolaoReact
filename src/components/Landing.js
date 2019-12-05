@@ -48,7 +48,7 @@ checkLog(){
                   <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="First slide" />
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="Second slide"/>
+                  <img class="d-block w-100" src={require("./../imgs/1.png")} alt="Second slide"/>
                 </div>
                 <div class="carousel-item">
                   <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="Third slide"/>
@@ -80,10 +80,10 @@ checkLog(){
                 <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="First slide" />
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="Second slide"/>
+                <img class="d-block w-100" src={require("./../imgs/1.png")} alt="Second slide"/>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" src={require("./../imgs/wp4959346.jpg")} alt="Third slide"/>
+                <img class="d-block w-100" src={require("./../imgs/2.png")} alt="Third slide"/>
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

@@ -21,9 +21,7 @@ return axios
 
 export const GetRoundsName  = rounds => {
 return axios
-    .post('/rounds/all',{
-        compName: rounds
-    })
+    .get('/rounds/all')
     .then(response => {
     return response.data
     })

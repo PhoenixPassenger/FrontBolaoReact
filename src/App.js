@@ -8,7 +8,7 @@ import Register from './components/Register'
 import Profile from './components/Profile'
 import Sort from './components/Sort'
 import Round from './components/RoundCreate'
-
+import ChooseComp from './components/ChooseCompetition'
 class App extends Component {
   render() {
     return (
@@ -22,6 +22,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/sort" component={Sort} />
             <Route exact path="/round" component={Round} />
+            <Route exact path="/roundname" component={ChooseComp} />
           </div>
         </div>
       </Router>

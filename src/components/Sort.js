@@ -35,7 +35,7 @@ shuffle(arr) {
     return arr;    
 };
   GetTeams(){
-     getTeam().then(a => {
+     getTeam(localStorage.optionChoosed).then(a => {
          
          let newvet = this.shuffle(a)
          let array = []
@@ -52,7 +52,7 @@ shuffle(arr) {
      })
 }
 
- componentWillMount(){
+ componentDidMount(){
     this.GetTeams()
 }
 
@@ -76,7 +76,7 @@ render(){
     <div className="jumbotron mt-5">
         <div className="col-sm-8 mx-auto" style={divStyle}> 
         <h1 className="text-center">Bet</h1>
-        <p className="text-center">Organize the way you want to, then push BET to make the hint</p>
+    <p className="text-center">Organize the way you want to, then push BET to make the hint on the {localStorage.optionChoosed} championship</p>
         </div>
             <div className="col-sm-8 mx-auto">
                 {this.state.dados && this.state && !this.state.isLoading &&

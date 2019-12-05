@@ -1,7 +1,9 @@
 import axios from 'axios'
 export const getTeam = teams => {
     return axios
-      .get('/teams/all')
+      .post('/teams/teamsRound',{
+        competitionName : teams
+      })
       .then(response => {
         return response.data
       })
