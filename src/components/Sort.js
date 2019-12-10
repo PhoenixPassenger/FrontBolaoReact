@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { getTeam } from './TeamFunctions'
 import uniqueId from 'lodash/uniqueId';
 import Sortable from 'react-sortablejs';
-
+import { createHints } from './HintFunctions'
 class Sort extends Component{
     constructor(){
         super();
@@ -35,7 +35,10 @@ class Sort extends Component{
             count+=1
         });
         console.log(hints)
-        this.props.history.push('/') 
+        createHints(hints).then(
+            this.props.history.push('/') 
+        )
+        this.props.history.push('/profile') 
     }
     
 
@@ -88,7 +91,8 @@ render(){
         float: 'right'
       };
     const simpleList = this.state.dados.map((val, key) => (
-        <li key={uniqueId()} data-id={val}> {val}</li>
+        // eslint-disable-next-line
+        <li key={uniqueId()} data-id={val}><img src = {this.state.objetos.find(element => element.name === val ).img}></img> {val}</li>
     ));
     
     return (

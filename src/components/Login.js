@@ -7,7 +7,7 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: null
     }
 
     this.onChange = this.onChange.bind(this)
@@ -30,7 +30,9 @@ class Login extends Component {
         this.props.history.push(`/profile`)
         window.location.reload();
       }else{
-        this.props.history.push('/')
+        this.setState({
+          errors : "Incorrect data!"
+        })
       }
     })
   }
@@ -43,6 +45,8 @@ class Login extends Component {
             <form noValidate onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
               <div className="form-group">
+                {this.state.errors &&
+                  <text>{this.state.errors}</text>}
                 <label htmlFor="email">Email address</label>
                 <input
                   type="email"
