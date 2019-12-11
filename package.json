@@ -21,5 +21,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://192.168.11.10:3000"
+  "proxy": "https://backend-bolao.herokuapp.com",
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  }
 }
