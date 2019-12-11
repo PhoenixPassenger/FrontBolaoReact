@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import { GetRoundsName } from './RoundFunctions'
+import { checkHint } from './HintFunctions'
 import Select from 'react-select';
 
 class ChooseComp extends Component{
@@ -16,7 +17,16 @@ class ChooseComp extends Component{
 async send(){
     localStorage.setItem('optionChoosed', this.state.selected)
     console.log(localStorage.optionChoosed)
-    this.props.history.push('/sort') 
+   await checkHint(localStorage.optionChoosed).then(resp => {
+     console.warn(resp)
+     if(resp === 0){
+       this.props.history.push('/sort') 
+      }else{
+        this.props.history.push('/')
+      }
+
+    })
+    
 }
 handleChange = selectedOption => {
     this.setState({ selected : selectedOption.value });
