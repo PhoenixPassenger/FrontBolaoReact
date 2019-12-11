@@ -45,7 +45,7 @@ type(){
                 <td>{this.state.name}</td>
               </tr>
               <tr>
-                <td>nickname</td>
+                <td>Nickname</td>
                 <td>{this.state.nickname}</td>
               </tr>
               <tr>

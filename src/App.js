@@ -9,6 +9,8 @@ import Profile from './components/Profile'
 import Sort from './components/Sort'
 import Round from './components/RoundCreate'
 import ChooseComp from './components/ChooseCompetition'
+import RoundCreated from './components/RoundCreated'
+import Ranking from './components/Ranking'
 class App extends Component {
   render() {
     return (
@@ -23,6 +25,8 @@ class App extends Component {
             <Route exact path="/sort" component={Sort} />
             <Route exact path="/round" component={Round} />
             <Route exact path="/roundname" component={ChooseComp} />
+            <Route exact path="/roundcreated" component={RoundCreated} />
+            <Route exact path="/ranking" component={Ranking} />
           </div>
         </div>
       </Router>

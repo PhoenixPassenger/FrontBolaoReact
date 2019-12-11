@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { getTeam } from './TeamFunctions'
 import uniqueId from 'lodash/uniqueId';
 import Sortable from 'react-sortablejs';
-import { createHints } from './HintFunctions'
+import { createHints, Calculate } from './HintFunctions'
 class Sort extends Component{
     constructor(){
         super();
@@ -35,10 +35,11 @@ class Sort extends Component{
             count+=1
         });
         console.log(hints)
-        createHints(hints).then(
-            this.props.history.push('/') 
-        )
-        this.props.history.push('/profile') 
+        createHints(hints).then(resp =>{
+            Calculate(localStorage.optionChoosed)
+        })
+            
+        this.props.history.push('/') 
     }
     
 

@@ -11,8 +11,8 @@ export const generateRound  = rounds => {
 
 export const getRoundByName  = rounds => {
 return axios
-    .get('/rounds/allByName',{
-        compName: rounds
+    .post('/rounds/allByName',{
+        competitionName: rounds
     })
     .then(response => {
     return response.data
@@ -26,3 +26,13 @@ return axios
     return response.data
     })
 }
+
+export const checkName  = rounds => {
+    return axios
+        .post('/rounds/checkName',{
+            competitionName: rounds
+        })
+        .then(response => {
+        return response.data
+        })
+    }

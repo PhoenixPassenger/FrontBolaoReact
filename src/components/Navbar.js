@@ -67,7 +67,12 @@ type(){
     </li>
     <li className="nav-item">
       <Link to="/round" className="nav-link">
-        Round
+        Create Round
+      </Link>
+    </li>
+    <li className="nav-item">
+      <Link to="/roundname" className="nav-link">
+        See Rounds
       </Link>
     </li>
   </ul>)

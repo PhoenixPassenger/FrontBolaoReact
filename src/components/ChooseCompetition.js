@@ -1,7 +1,8 @@
 import React, { Component }  from 'react';
-import { GetRoundsName } from './RoundFunctions'
+import { GetRoundsName, checkName } from './RoundFunctions'
 import { checkHint } from './HintFunctions'
 import Select from 'react-select';
+import jwt_decode from 'jwt-decode'
 
 class ChooseComp extends Component{
     constructor(){
@@ -16,16 +17,30 @@ class ChooseComp extends Component{
 
 async send(){
     localStorage.setItem('optionChoosed', this.state.selected)
+    const token = localStorage.usertoken
+    const decoded = jwt_decode(token)
     console.log(localStorage.optionChoosed)
-   await checkHint(localStorage.optionChoosed).then(resp => {
-     console.warn(resp)
-     if(resp === 0){
-       this.props.history.push('/sort') 
-      }else{
-        this.props.history.push('/')
-      }
-
-    })
+    if(!decoded.isAdmin){
+      await checkHint(localStorage.optionChoosed).then(resp => {
+        console.warn(resp)
+        if(resp === 0){
+          this.props.history.push('/sort') 
+         }else{
+           this.props.history.push('/ranking')
+         }
+   
+       })
+    }else{
+      await checkName(localStorage.optionChoosed).then(resp => {
+        console.warn(resp)
+        if(resp){
+          this.props.history.push('/roundcreated') 
+         }else{
+           this.props.history.push('/round')
+         }
+   
+       })
+    }
     
 }
 handleChange = selectedOption => {
@@ -61,8 +76,10 @@ render(){
         float: 'right'
       };
     return(
-    <div>
-    <div>
+<div className="container">
+        <div className="row">
+          <div className="col-md-6 mt-5 mx-auto">
+           <div className = 'jumbotron'>
     {this.state.dados && !this.state.isLoading &&
 <div><Select
         value={selectedOption}
@@ -78,7 +95,7 @@ render(){
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Make a bet</h5>
+            <h5 class="modal-title" id="exampleModalLabel">See the chosen round</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" > 
               <span aria-hidden="true">&times;</span>
             </button>
@@ -88,10 +105,12 @@ render(){
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.send.bind(this)}>Send Bet</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.send.bind(this)}>See round</button>
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
 </div>
     )
